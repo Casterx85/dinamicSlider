@@ -1,0 +1,435 @@
+#slider {
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 15% 5% 40% 40% 60% 40% 30% 30%;
+  grid-template-columns: 1fr;
+
+  @include tablet {
+    grid-template-rows: 30% 15% 5% 10% 10% 20% 10%;
+    grid-template-columns: 20% 30% 10% 40%;
+    grid-template-areas:
+      "row1 logo subtitle subtitle"
+      "row2 title subtitle subtitle"
+      "row3 title subtitle subtitle"
+      "transparent load img img"
+      "transparent buttons img img"
+      "row6 row6 img img"
+      "row7 row7 row7 row7";
+  }
+
+  @include large {
+    grid-template-rows: 45% 20% 25% 10%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "logo subtitle row1 img"
+      "title title title img"
+      "row3 row3 load row3end"
+      "row4 row4 buttons row4end";
+  }
+}
+
+.bg1 {
+  grid-row: 1 / 2;
+  grid-column: 1 / -1;
+
+  @include tablet {
+    grid-row: 1 / 4;
+    grid-column: 1 / 3;
+  }
+
+  @include large {
+    grid-row: 1 / 4;
+    grid-column: 1 / 2;
+  }
+}
+
+.bg2 {
+  grid-row: 5 / 7;
+  grid-column: 1 / 2;
+  overflow: hidden;
+  z-index: -1;
+
+  @include tablet {
+    grid-row: 4 / 8;
+    grid-column: 1 / 5;
+    overflow: initial;
+    z-index: initial;
+  }
+
+  @include large {
+    grid-row: 1 / 4;
+    grid-column: 2 / 5;
+  }
+
+  & img {
+    width: 246% !important;
+
+    @include tablet {
+      width: 100% !important;
+    }
+  }
+}
+
+.bg3 {
+  grid-row: 2 / 5;
+  grid-column: 1 / 2;
+  overflow: hidden;
+
+  @include tablet {
+    grid-row: 3 / 7;
+    grid-column: 3 / 5;
+    overflow: initial;
+    z-index: 1;
+    opacity: 0;
+    @include animation (slide-down, 2s);
+  }
+
+  @include large {
+    grid-area: img;
+    opacity: 0;
+    @include animation (slide-down, 2s, linear, 2s);
+  }
+
+  & img {
+    width: 152% !important;
+    object-fit: cover;
+
+    @include tablet {
+      width: 100% !important;
+      object-fit: initial;
+    }
+  }
+}
+
+.bg {
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logo{
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
+
+  @include tablet {
+    grid-area: logo;
+    opacity: 0;
+    @include animation (slide-down, 2s, linear, 2s);
+  }
+
+  @include large {
+    grid-area: logo;
+    opacity: 0;
+    @include animation (slide-down, 2s, linear, 2s);
+  }
+
+  & img {
+    position: relative;
+    top: 0%;
+    left: 30vw;
+    transform: scale(0.7);
+
+    @include tablet {
+      transform: none;
+      top: 20%;
+      left: 0%;
+    }
+
+    @include large {
+      top: 25%;
+      left: 40%;
+      transform: scale(1.3);
+    }
+  }
+}
+
+.title {
+  grid-row: 4 / 5;
+  grid-column: 1 / 2;
+  align-self: flex-end;
+  z-index: 10; 
+
+  @include tablet {
+    grid-row: 2 / 4;
+    grid-column: 2 / 4;
+    align-self: initial;
+    opacity: 0;
+    @include animation (slide-right, 2s);    
+  }
+
+  @include large {
+    grid-row: 2 / 3;
+    grid-column: 1 / 4;
+    align-self: initial;
+    opacity: 0;
+    @include animation (slide-right, 2s);    
+  }
+
+  & h1 {
+    font-family: $font_family_alternative;
+    font-size: $base * 7;
+    font-weight: bold;
+    width: 100%;
+    position: relative;    
+    left: 5%;
+    margin: 0;
+    margin-bottom: $base*2;
+    white-space: pre-wrap;
+
+    @include tablet {
+      font-size: $base * 7.4;
+      line-height: $base * 7.4;
+      left: 0;
+      margin-bottom: $base;
+      white-space: initial;
+    }
+
+    @include large {
+      font-size: $base * 14;
+      left: 15%;
+      margin: 0;
+      white-space: initial;
+      line-height: initial;
+    }
+  }
+  
+  & a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    background-color: var(--color3);
+    padding: 5%;
+
+    @include tablet {
+      display: initial;
+      width: auto;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    @include large {
+      display: initial;
+      width: auto;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    & button {
+      cursor: pointer;
+      font-family: $font_family_base;
+      font-style: italic;
+      font-size: $base * 4;
+      background-color: var(--color4);
+      border: 1px solid var(--color5);
+      color: var(--color1);
+      padding: $base*2;
+      width: 100%;
+
+      @include tablet {
+        font-size: $base * 2;
+        padding: $base*2 $base*3;
+        position: relative;
+        left: 0;
+        width: auto;
+      }
+
+      @include large {
+        position: relative;
+        left: 15%;
+        width: auto;
+        padding: $base*3 $base*4;
+        font-size: $base * 4;
+      }
+    }
+  }
+}
+
+.subtitle {
+  grid-row: 5 / 6;
+  grid-column: 1 / 2;
+  padding: 10% 5%;
+  @include bg-opacity($subtitle_bg_color, 0.3);  
+
+  @include tablet {
+    grid-area: subtitle;
+    padding: 10%;
+    opacity: 0;
+    @include animation (slide-down, 2s, linear, 2s);
+  }
+
+  @include large {
+    grid-row: 1 / 3;
+    grid-column: 2 / 3;
+    padding: 10%;
+    opacity: 0;
+    @include animation (slide-down, 2s);
+  }
+
+  & img {
+    width: 37%;
+
+    @include tablet {
+      width: 30%;
+    }
+
+    @include large {
+      width: 40%;
+    }
+  }
+
+  & h2 {
+    font-family: $font_family_base;
+    font-size: $base * 4.6;
+    margin: 0;
+
+    @include tablet {
+      font-size: $base * 3;
+    }
+
+    @include large {
+      font-size: $base * 5;
+    }
+  }
+
+  & hr {
+    margin: 0;
+    margin-top: .5rem;
+    height: 2%;
+    background-color: var(--color6);
+    width: 35%;
+    border: none;
+
+    @include tablet {
+      height: 1%;
+      width: 28%;
+    }
+
+    @include large {
+      width: 37%;
+    }
+  }
+
+  & .hash {
+    font-style: italic;
+    font-size: $base * 3.2;
+
+    @include tablet {
+      font-size: $base * 2.4;
+    }
+
+    @include large {
+      font-size: $base * 3.5;
+    }
+  }
+}
+
+.bg4 {
+  grid-row: 7 / 9;
+  grid-column: 1 / 2;
+  z-index: -1;
+
+  @include tablet {
+    display: none;
+  }
+
+  & img {
+    object-fit: cover;
+  }
+}
+
+.textBg4 {
+  grid-row: 8 / 9;
+  grid-column: 1 / 2;
+  padding: 0 10%;
+  font-size: $base * 6;
+  height: fit-content;
+  margin: 0;
+  z-index: 1;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.loading {
+  display: none;
+
+  @include tablet {
+    grid-row: 4 / 5;
+    grid-column: 2 / 4;
+    z-index: 5;
+    background-color: var(--color3);
+    display: flex;
+    align-items: center;
+    padding: 0 15%;
+    opacity: 0;
+    @include animation (fade-in, 2s);
+  }
+
+  @include large {
+    grid-area: load;
+    background-color: var(--color3);
+    display: flex;
+    align-items: center;
+    padding: 0 15%;
+    opacity: 0;
+    @include animation (fade-in, 2s);
+  }
+
+  & #bar {
+    width: 100%;
+    height: 3%;
+    position: relative;
+    background-color: var(--color8);
+    border-radius: $base * 4;
+
+    & span {
+      display: block;
+      height: 100%;
+      border-radius: $base * 4;
+      background-color: var(--color6);
+      position: relative;
+      overflow: hidden;
+      animation: prog 4s linear 4s both;
+    }
+  }
+}
+
+.buttons {
+  display: none;
+
+  @include tablet {
+    grid-row: 5 / 6;
+    grid-column: 2 / 4;
+    z-index: 5;
+    background-color: var(--color3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    @include animation (fade-in, 2s);
+  }
+
+  @include large {
+    grid-area: buttons;
+    background-color: var(--color3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    @include animation (fade-in, 2s);
+  }
+  
+  & div {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    font-size: $base * 2;
+
+    &:hover {
+      color: var(--color6);
+    }
+  }
+}

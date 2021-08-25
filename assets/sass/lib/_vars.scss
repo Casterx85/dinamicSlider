@@ -1,0 +1,153 @@
+$font_family_base: 'Merriweather', serif;
+$font_family_alternative: 'Montserrat', sans_serif;
+
+$base: .5rem;
+$font_size_base: $base * 2;
+$font_weight_base: normal;
+$line_height_base: $base * 3;
+
+$body_color: white;
+$body_bg: #242839;
+$subtitle_bg_color: #229077;
+
+$link_color: #345c8d;
+$link_decoration: none;
+$link_hover_color: darken($link_color, 10%);
+$link_hover_decoration: none;
+$table_cell_padding: .5em;
+
+$text_muted: lighten($body_color, 15%);
+
+$colors: (
+  "white": white,
+  "black": black,
+  "lblack": #242839,
+  "rose": #ff2a5c,
+  "drose": darken(#ff2a5c, 10%),
+  "lgreen": #45d3b3,
+  "dgreen": #229077,
+  "lgray": lightgray
+);
+
+/* -------- MIXINS ----- */
+@mixin keyframes ($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+      @content;
+  }
+  @-o-keyframes #{$name} {
+      @content;
+  }
+  @keyframes #{$name} {
+      @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin animation ($name, $duration: 1s, $timing: linear, $delay: 0s,  $mode: both) {
+  -webkit-animation       : $name $duration $timing $delay $mode;
+  -moz-animation         : $name $duration $timing $delay $mode;
+  -o-animation           : $name $duration $timing $delay $mode;
+  animation              : $name $duration $timing $delay $mode;
+}
+
+@mixin transform-translate($x, $y){
+  @if($x != null){
+      -webkit-transform: translateX($x);
+      -moz-transform   : translateX($x);
+      -o-transform     : translateX($x);
+      -ms-transform    : translateX($x);
+      transform        : translateX($x);
+  }
+  @if($y != null){
+      -webkit-transform: translateY($y);
+      -moz-transform   : translateY($y);
+      -o-transform     : translateY($y);
+      -ms-transform    : translateY($y);
+      transform        : translateY($y);
+  }
+}
+
+@mixin bg-opacity($color, $opacity) {
+  background: $color;
+  background: rgba($color, $opacity);
+}
+
+/* -------- KEYFRAMES ----- */
+@keyframes prog {
+  0% {width: 0%}
+  100% {width: 100%}
+}
+
+@include keyframes(fade-in){
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@include keyframes(fade-out){
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@include keyframes(slide-up){
+  0% {
+    opacity: 0;
+    @include transform-translate(null,200%);
+  }
+  100% {
+    opacity: 1;
+    @include transform-translate(null,0);
+  }
+}
+
+@include keyframes(slide-down){
+  0% {
+    opacity: 0;
+    @include transform-translate(null,-100%);
+  }
+  100% {
+    opacity: 1;
+    @include transform-translate(null,0);
+  }
+}
+
+@include keyframes(slide-right){
+  0% {
+    opacity: 0;
+    @include transform-translate(-100%,null);
+  }
+  100% {
+    opacity: 1;
+    @include transform-translate(0,0);
+  }
+}
+
+@include keyframes(slide-left){
+  0% {
+    opacity: 0;
+    @include transform-translate(200%,null);
+  }
+  100% {
+    opacity: 1;
+    @include transform-translate(0,0);
+  }
+}
